@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthenticationController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
-
+use App\Http\Controllers\SubscriptionController;
 
 
 
@@ -17,6 +17,7 @@ Route::get('/email/verify/{id}/{hash}', [AuthenticationController::class, 'verif
 ->middleware(['auth:sanctum', 'signed'])->name('verification.verify');
 Route::get('/auth/google/redirect', [AuthenticationController::class, 'redirectToGoogle']);
 Route::get('/auth/google/callback', [AuthenticationController::class, 'handleGoogleCallback']);
+Route::post('/subscribe', [SubscriptionController::class, 'store']);
 
 
 
