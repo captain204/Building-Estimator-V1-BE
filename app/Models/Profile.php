@@ -5,14 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Subscriber extends Model
+class Profile extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'user_id',
         'firstname',
         'lastname',
-        'email',
+        'country',
+        'builder_type',
         'phone',
+        'birthdate',
+        'bio',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -24,13 +24,10 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<int, string>
      */
     protected $fillable = [
-        //'name',
-        'firstname',
-        'lastname',
+        'name',
         'email',
         'password',
-        'country',
-        'builder_type',
+        'role'
     ];
 
     /**
@@ -55,4 +52,23 @@ class User extends Authenticatable implements MustVerifyEmail
             'password' => 'hashed',
         ];
     }
+
+    public function isAdmin(){
+        return $this->role === 1;
+    }
+
+    public function isUser(){
+        return $this->role === 0;
+    }
+
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+
+    public function blogs()
+    {
+        return $this->hasMany(Blog::class);
+    }
+
 }
