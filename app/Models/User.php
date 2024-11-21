@@ -70,5 +70,11 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Blog::class);
     }
+    public function estimateRequests()
+    {
+        return $this->hasMany(EstimateRequest::class, 'user_id');
+    }
+
+
 
 }

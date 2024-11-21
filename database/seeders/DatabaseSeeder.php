@@ -28,7 +28,8 @@ class DatabaseSeeder extends Seeder
             'role' => 1,
             'password' => bcrypt('BuildAdmin') 
         ]);
-        
+        $this->call(EstimateCategorySeeder::class);
+        $this->call(EstimateCategoryOptionSeeder::class);   
         //$this->call(ProfileSeeder::class);
         //$this->call(BlogSeeder::class);
     }

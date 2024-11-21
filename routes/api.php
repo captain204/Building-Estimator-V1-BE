@@ -11,6 +11,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BlogImageController;
+use App\Http\Controllers\EstimateCategoryController;
+use App\Http\Controllers\EstimateCategoryOptionController;
 
 
 
@@ -27,6 +29,7 @@ Route::get('/auth/google/callback', [AuthenticationController::class, 'handleGoo
 Route::post('/subscribe', [SubscriptionController::class, 'store']);
 Route::get('/blog', [BlogController::class, 'index']);        
 Route::get('/blog/{id}', [BlogController::class, 'show']);
+
 
 Route::middleware('auth:sanctum')->prefix('users')->group(function () {
     
@@ -50,13 +53,14 @@ Route::middleware('auth:sanctum')->group(function () {
     // Authentication routes
     Route::post('/email/resend', [AuthenticationController::class, 'resendVerification']);
     Route::post('/logout', [AuthenticationController::class, 'logout']);
+   
+
 });
 
 
 
 
 Route::middleware(['auth:sanctum', AdminMiddleware::class])->prefix('admin')->group(function () {
-
      // Blog Routes
      Route::post('/blog', [BlogController::class, 'create']);               
      Route::put('/blog/{id}', [BlogController::class, 'update']);  
@@ -67,7 +71,20 @@ Route::middleware(['auth:sanctum', AdminMiddleware::class])->prefix('admin')->gr
      Route::put('/blog/images/{id}', [BlogImageController::class, 'update']);
      Route::delete('/blog/images/{id}', [BlogImageController::class, 'destroy']);
     
-    
+     #Estimates Category
+     Route::get('/categories', [EstimateCategoryController::class, 'index']);
+     Route::get('/categories/{id}', [EstimateCategoryController::class, 'show']);     
+     Route::post('/categories', [EstimateCategoryController::class, 'store']);
+     Route::put('/categories/{id}', [EstimateCategoryController::class, 'update']);
+     Route::delete('/categories/{id}', [EstimateCategoryController::class, 'destroy']);
+     
+     #Estimate Category Options
+     Route::get('/options', [EstimateCategoryOptionController::class, 'index']);
+     //Route::get('/options/{id}', [EstimateCategoryOptionController::class, 'show']);
+     Route::post('/options', [EstimateCategoryOptionController::class, 'store']);
+     Route::put('/options/{id}', [EstimateCategoryOptionController::class, 'update']);
+     Route::delete('/options/{id}', [EstimateCategoryOptionController::class, 'destroy']);
+     Route::get('/categories/{categoryId}/options', [EstimateCategoryOptionController::class, 'getByCategory']);
 
 });
 
