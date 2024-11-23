@@ -13,6 +13,9 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BlogImageController;
 use App\Http\Controllers\EstimateCategoryController;
 use App\Http\Controllers\EstimateCategoryOptionController;
+use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\OptionController;
+use App\Http\Controllers\SubOptionController;
 
 
 
@@ -77,14 +80,13 @@ Route::middleware(['auth:sanctum', AdminMiddleware::class])->prefix('admin')->gr
      Route::post('/categories', [EstimateCategoryController::class, 'store']);
      Route::put('/categories/{id}', [EstimateCategoryController::class, 'update']);
      Route::delete('/categories/{id}', [EstimateCategoryController::class, 'destroy']);
-     
-     #Estimate Category Options
-     Route::get('/options', [EstimateCategoryOptionController::class, 'index']);
-     //Route::get('/options/{id}', [EstimateCategoryOptionController::class, 'show']);
-     Route::post('/options', [EstimateCategoryOptionController::class, 'store']);
-     Route::put('/options/{id}', [EstimateCategoryOptionController::class, 'update']);
-     Route::delete('/options/{id}', [EstimateCategoryOptionController::class, 'destroy']);
-     Route::get('/categories/{categoryId}/options', [EstimateCategoryOptionController::class, 'getByCategory']);
+    
+     #Automated Question Routes
+     Route::apiResource('questions', QuestionController::class);
+     Route::apiResource('options', OptionController::class);
+     Route::apiResource('suboptions', SubOptionController::class);
+
+
 
 });
 
