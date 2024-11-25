@@ -10,7 +10,12 @@ class Option extends Model
     use HasFactory;
 
     
-    protected $fillable = ['question_id', 'type', 'name', 'description', 'question'];
+    protected $fillable = [
+        'question_id', 
+        'type', 
+        'name', 
+        'description', 
+        'question'];
 
     /**
      * Option belongs to a Question.

@@ -16,6 +16,7 @@ use App\Http\Controllers\EstimateCategoryOptionController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\OptionController;
 use App\Http\Controllers\SubOptionController;
+use App\Http\Controllers\UserController;
 
 
 
@@ -86,8 +87,21 @@ Route::middleware(['auth:sanctum', AdminMiddleware::class])->prefix('admin')->gr
      Route::apiResource('options', OptionController::class);
      Route::apiResource('suboptions', SubOptionController::class);
 
-
-
+     #User Admin Controller
+     Route::post('/create', [UserController::class, 'createAdmin']);
+     Route::put('/update/{id}', [UserController::class, 'updateAdmin']);
+     Route::get('/all', [UserController::class, 'getAllAdmins']);
+     Route::delete('/deleteadmin/{id}', [UserController::class, 'deleteAdmin']);
+     Route::get('/verified-users', [UserController::class, 'getVerifiedUsers']);
+     Route::get('/unverified', [UserController::class, 'getUnverifiedUsers']);
+     Route::get('/users', [UserController::class, 'getAllUsers']);
+     Route::put('ban/{id}', [UserController::class, 'banUser']);
+     Route::patch('/{id}/unban', [UserController::class, 'unbanUser']);
+     Route::get('/banned-users', [UserController::class, 'getBannedUsers']);
+     Route::get('users/count', [UserController::class, 'countAllUsers']);
+     Route::get('/verified-users/count', [UserController::class, 'countVerifiedUsers']);
+     Route::get('/unverified-users/count', [UserController::class, 'countUnverifiedUsers']);
+     Route::get('/banned-users/count', [UserController::class, 'countBannedUsers']);
 });
 
 
