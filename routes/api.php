@@ -84,8 +84,24 @@ Route::middleware(['auth:sanctum', AdminMiddleware::class])->prefix('admin')->gr
     
      #Automated Question Routes
      Route::apiResource('questions', QuestionController::class);
-     Route::apiResource('options', OptionController::class);
-     Route::apiResource('suboptions', SubOptionController::class);
+     #Route::apiResource('options', OptionController::class);
+     #Route::apiResource('suboptions', SubOptionController::class);
+     #Options
+     Route::get('options', [OptionController::class, 'index'])->name('options.index');
+     Route::get('options/{option}', [OptionController::class, 'show'])->name('options.show');
+     Route::post('options', [OptionController::class, 'store'])->name('options.store');
+     Route::put('options/{option}', [OptionController::class, 'update'])->name('options.update');
+     Route::patch('options/{option}', [OptionController::class, 'update'])->name('options.update');
+     Route::delete('options/{option}', [OptionController::class, 'destroy'])->name('options.destroy');
+     #SubOptions
+     Route::get('suboptions', [SubOptionController::class, 'index'])->name('suboptions.index');
+     Route::get('suboptions/{suboption}', [SubOptionController::class, 'show'])->name('suboptions.show');
+     Route::post('suboptions', [SubOptionController::class, 'store'])->name('suboptions.store');
+     Route::put('suboptions/{suboption}', [SubOptionController::class, 'update'])->name('suboptions.update');
+     Route::patch('suboptions/{suboption}', [SubOptionController::class, 'update'])->name('suboptions.update');
+     Route::delete('suboptions/{suboption}', [SubOptionController::class, 'destroy'])->name('suboptions.destroy');
+
+     
 
      #User Admin Controller
      Route::post('/create', [UserController::class, 'createAdmin']);
