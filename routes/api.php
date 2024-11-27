@@ -17,6 +17,7 @@ use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\OptionController;
 use App\Http\Controllers\SubOptionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\MaterialPriceListController;
 
 
 
@@ -101,7 +102,9 @@ Route::middleware(['auth:sanctum', AdminMiddleware::class])->prefix('admin')->gr
      Route::patch('suboptions/{suboption}', [SubOptionController::class, 'update'])->name('suboptions.update');
      Route::delete('suboptions/{suboption}', [SubOptionController::class, 'destroy'])->name('suboptions.destroy');
 
-     
+     #Material PriceList
+     Route::apiResource('material-price-lists', MaterialPriceListController::class);
+
 
      #User Admin Controller
      Route::post('/create', [UserController::class, 'createAdmin']);

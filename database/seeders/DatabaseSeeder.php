@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
+        /*User::factory()->create([
             'name' => 'SuperAdmin1',
             'email' => 'buildingestimatorsuper1@admin.com', 
             'role' => 1,
@@ -27,12 +27,14 @@ class DatabaseSeeder extends Seeder
             'email' => 'buildingestimator2@admin.com', 
             'role' => 1,
             'password' => bcrypt('BuildAdmin') 
-        ]);
-        $this->call(EstimateCategorySeeder::class);
+        ]);*/
+        /*$this->call(EstimateCategorySeeder::class);
         $this->call(EstimateCategoryOptionSeeder::class);
         $this->call(QuestionSeeder::class);
         $this->call(OptionSeeder::class);
-        $this->call(SubOptionSeeder::class);   
+        $this->call(SubOptionSeeder::class)*/;
+        
+        $this->call(MaterialPriceList::class);
         //$this->call(ProfileSeeder::class);
         //$this->call(BlogSeeder::class);
     }
