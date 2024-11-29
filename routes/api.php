@@ -18,6 +18,7 @@ use App\Http\Controllers\OptionController;
 use App\Http\Controllers\SubOptionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MaterialPriceListController;
+use App\Http\Controllers\LabourRatesController;
 
 
 
@@ -103,8 +104,22 @@ Route::middleware(['auth:sanctum', AdminMiddleware::class])->prefix('admin')->gr
      Route::delete('suboptions/{suboption}', [SubOptionController::class, 'destroy'])->name('suboptions.destroy');
 
      #Material PriceList
-     Route::apiResource('material-price-lists', MaterialPriceListController::class);
+     #Route::apiResource('material-price-lists', MaterialPriceListController::class);
+     Route::get('material-price-lists', [MaterialPriceListController::class, 'index'])->name('material-price-lists.index');
+     Route::get('material-price-lists/{id}', [MaterialPriceListController::class, 'show'])->name('material-price-lists.show');
+     Route::post('material-price-lists', [MaterialPriceListController::class, 'store'])->name('material-price-lists.store');
+     Route::put('material-price-lists/{id}', [MaterialPriceListController::class, 'update'])->name('material-price-lists.update');
+     Route::patch('material-price-lists/{id}', [MaterialPriceListController::class, 'update'])->name('material-price-lists.update');
+     Route::delete('material-price-lists/{id}', [MaterialPriceListController::class, 'destroy'])->name('material-price-lists.destroy');
 
+     #Labor Rates
+     #Route::apiResource('labor-price-lists', LabourRatesController::class);
+     Route::get('labor-price-lists', [LabourRatesController::class, 'index'])->name('labor-price-lists.index');
+     Route::get('labor-price-lists/{id}', [LabourRatesController::class, 'show'])->name('labor-price-lists.show');
+     Route::post('labor-price-lists', [LabourRatesController::class, 'store'])->name('labor-price-lists.store');
+     Route::put('labor-price-lists/{id}', [LabourRatesController::class, 'update'])->name('labor-price-lists.update');
+     Route::patch('labor-price-lists/{id}', [LabourRatesController::class, 'update'])->name('labor-price-lists.update');
+     Route::delete('labor-price-lists/{id}', [LabourRatesController::class, 'destroy'])->name('labor-price-lists.destroy');
 
      #User Admin Controller
      Route::post('/create', [UserController::class, 'createAdmin']);

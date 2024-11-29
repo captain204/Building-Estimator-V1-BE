@@ -33,8 +33,8 @@ class DatabaseSeeder extends Seeder
         $this->call(QuestionSeeder::class);
         $this->call(OptionSeeder::class);
         $this->call(SubOptionSeeder::class)*/;
-        
-        $this->call(MaterialPriceList::class);
+        $this->call(LabourRatesSeeder::class);
+        #$this->call(MaterialPriceList::class);
         //$this->call(ProfileSeeder::class);
         //$this->call(BlogSeeder::class);
     }
