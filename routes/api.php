@@ -33,6 +33,7 @@ Route::get('/email/verify/{id}/{hash}', [AuthenticationController::class, 'verif
 Route::get('/auth/google/redirect', [AuthenticationController::class, 'redirectToGoogle']);
 Route::get('/auth/google/callback', [AuthenticationController::class, 'handleGoogleCallback']);
 Route::post('/subscribe', [SubscriptionController::class, 'store']);
+Route::post('/unsubscribe', [SubscriptionController::class, 'unsubscribe']);
 Route::get('/blog', [BlogController::class, 'index']);        
 Route::get('/blog/{id}', [BlogController::class, 'show']);
 
@@ -136,6 +137,10 @@ Route::middleware(['auth:sanctum', AdminMiddleware::class])->prefix('admin')->gr
      Route::get('/verified-users/count', [UserController::class, 'countVerifiedUsers']);
      Route::get('/unverified-users/count', [UserController::class, 'countUnverifiedUsers']);
      Route::get('/banned-users/count', [UserController::class, 'countBannedUsers']);
+     #Send Newsletter
+     Route::post('/newsletter/send', [SubscriptionController::class, 'sendNewsletter']);
+     Route::get('/subscribe/total', [SubscriptionController::class, 'totalSubscribers']);
+     Route::get('/unsubscribed/total', [SubscriptionController::class, 'totalUnsubscribed']);
 });
 
 
