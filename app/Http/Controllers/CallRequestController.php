@@ -78,4 +78,18 @@ class CallRequestController extends Controller
             'message' => 'Callback request deleted successfully.',
         ], 200);
     }
+
+    /**
+     * Get the total number of responses.
+    */
+    public function totalResponses()
+    {
+        $totalResponses = CallRequest::where('response', true)->count();
+
+        return response()->json([
+            'message' => 'Total number of responses retrieved successfully.',
+            'total_responses' => $totalResponses,
+        ], 200);
+    }
+
 }

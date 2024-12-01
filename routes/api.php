@@ -150,6 +150,7 @@ Route::middleware(['auth:sanctum', AdminMiddleware::class])->prefix('admin')->gr
     Route::get('/callback-requests', [CallRequestController::class, 'index']); 
     Route::patch('/callback-requests/{id}/response', [CallRequestController::class, 'updateResponse']); 
     Route::delete('/callback-requests/{id}', [CallRequestController::class, 'destroy']);
+    Route::get('callback-requests/total-responses', [CallRequestController::class, 'totalResponses']);
 });
 
 
