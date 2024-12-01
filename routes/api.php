@@ -19,6 +19,8 @@ use App\Http\Controllers\SubOptionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MaterialPriceListController;
 use App\Http\Controllers\LabourRatesController;
+use App\Http\Controllers\CallRequestController;
+
 
 
 
@@ -34,6 +36,7 @@ Route::get('/auth/google/redirect', [AuthenticationController::class, 'redirectT
 Route::get('/auth/google/callback', [AuthenticationController::class, 'handleGoogleCallback']);
 Route::post('/subscribe', [SubscriptionController::class, 'store']);
 Route::post('/unsubscribe', [SubscriptionController::class, 'unsubscribe']);
+Route::post('/callback-requests', [CallRequestController::class, 'store']); 
 Route::get('/blog', [BlogController::class, 'index']);        
 Route::get('/blog/{id}', [BlogController::class, 'show']);
 
@@ -141,6 +144,12 @@ Route::middleware(['auth:sanctum', AdminMiddleware::class])->prefix('admin')->gr
      Route::post('/newsletter/send', [SubscriptionController::class, 'sendNewsletter']);
      Route::get('/subscribe/total', [SubscriptionController::class, 'totalSubscribers']);
      Route::get('/unsubscribed/total', [SubscriptionController::class, 'totalUnsubscribed']);
+
+    
+    #Call Back Request
+    Route::get('/callback-requests', [CallRequestController::class, 'index']); 
+    Route::patch('/callback-requests/{id}/response', [CallRequestController::class, 'updateResponse']); 
+    Route::delete('/callback-requests/{id}', [CallRequestController::class, 'destroy']);
 });
 
 
