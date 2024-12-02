@@ -150,6 +150,7 @@ Route::middleware(['auth:sanctum', AdminMiddleware::class])->prefix('admin')->gr
      Route::post('/newsletter/send', [SubscriptionController::class, 'sendNewsletter']);
      Route::get('/subscribe/total', [SubscriptionController::class, 'totalSubscribers']);
      Route::get('/unsubscribed/total', [SubscriptionController::class, 'totalUnsubscribed']);
+     Route::get('/subscribers', [SubscriptionController::class, 'getAllSubscribers']);
 
     
     #Call Back Request

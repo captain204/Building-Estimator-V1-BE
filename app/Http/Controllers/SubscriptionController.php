@@ -119,4 +119,16 @@ class SubscriptionController extends Controller
         ]);
     }
 
+    
+    public function getAllSubscribers()
+    {
+        $subscribers = Subscriber::all();
+
+        return response()->json([
+            'message' => 'Subscribers retrieved successfully.',
+            'subscribers' => $subscribers,
+        ], 200);
+    }
+
+
 }
