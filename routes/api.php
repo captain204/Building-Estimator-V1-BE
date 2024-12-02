@@ -20,7 +20,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\MaterialPriceListController;
 use App\Http\Controllers\LabourRatesController;
 use App\Http\Controllers\CallRequestController;
-
+use App\Http\Controllers\EventController;
 
 
 
@@ -39,6 +39,12 @@ Route::post('/unsubscribe', [SubscriptionController::class, 'unsubscribe']);
 Route::post('/callback-requests', [CallRequestController::class, 'store']); 
 Route::get('/blog', [BlogController::class, 'index']);        
 Route::get('/blog/{id}', [BlogController::class, 'show']);
+Route::get('/events', [EventController::class, 'index']); 
+Route::get('/events/{id}', [EventController::class, 'show']);
+
+
+
+
 
 
 Route::middleware('auth:sanctum')->prefix('users')->group(function () {
@@ -151,9 +157,13 @@ Route::middleware(['auth:sanctum', AdminMiddleware::class])->prefix('admin')->gr
     Route::patch('/callback-requests/{id}/response', [CallRequestController::class, 'updateResponse']); 
     Route::delete('/callback-requests/{id}', [CallRequestController::class, 'destroy']);
     Route::get('callback-requests/total-responses', [CallRequestController::class, 'totalResponses']);
+
+    #Event
+    Route::post('/events', [EventController::class, 'store']);  
+    Route::put('/events/{id}', [EventController::class, 'update']);
+    Route::delete('/events/{id}', [EventController::class, 'destroy']); 
+
 });
-
-
 
 
 

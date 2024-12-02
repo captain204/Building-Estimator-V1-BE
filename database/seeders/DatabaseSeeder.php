@@ -35,6 +35,7 @@ class DatabaseSeeder extends Seeder
         $this->call(SubOptionSeeder::class)*/;
         $this->call(LabourRatesSeeder::class);
         $this->call(CallbackRequestSeeder::class);
+        $this->call(EventSeeder::class);
         #$this->call(MaterialPriceList::class);
         //$this->call(ProfileSeeder::class);
         //$this->call(BlogSeeder::class);
