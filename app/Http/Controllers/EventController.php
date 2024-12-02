@@ -29,7 +29,7 @@ class EventController extends Controller
             $validated['image_path'] = null;
         }
 
-        $validated['slug'] = \Str::slug($validated['title']);
+        #$validated['slug'] = \Str::slug($validated['title']);
 
         $event = Event::create($validated);
 

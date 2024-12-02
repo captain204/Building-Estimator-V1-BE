@@ -20,7 +20,7 @@ class EventFactory extends Factory
     {
         return [
             'title' => $this->faker->sentence,
-            'slug' => $this->faker->sentence,
+            #'slug' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
             'event_date' => $this->faker->date,
             'image_path' => 'uploads/default.jpg', 
