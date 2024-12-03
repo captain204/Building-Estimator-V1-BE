@@ -21,6 +21,8 @@ use App\Http\Controllers\MaterialPriceListController;
 use App\Http\Controllers\LabourRatesController;
 use App\Http\Controllers\CallRequestController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\CostTrackerController;
+
 
 
 
@@ -41,8 +43,8 @@ Route::get('/blog', [BlogController::class, 'index']);
 Route::get('/blog/{id}', [BlogController::class, 'show']);
 Route::get('/events', [EventController::class, 'index']); 
 Route::get('/events/{id}', [EventController::class, 'show']);
-
-
+Route::get('cost-trackers', [CostTrackerController::class, 'index']);
+Route::get('cost-trackers/{id}', [CostTrackerController::class, 'show']);
 
 
 
@@ -162,7 +164,14 @@ Route::middleware(['auth:sanctum', AdminMiddleware::class])->prefix('admin')->gr
     #Event
     Route::post('/events', [EventController::class, 'store']);  
     Route::put('/events/{id}', [EventController::class, 'update']);
-    Route::delete('/events/{id}', [EventController::class, 'destroy']); 
+    Route::delete('/events/{id}', [EventController::class, 'destroy']);
+    
+    #Cost tracker
+    Route::get('cost-trackers', [CostTrackerController::class, 'index']);
+    Route::post('cost-trackers', [CostTrackerController::class, 'store']);
+    Route::get('cost-trackers/{id}', [CostTrackerController::class, 'show']);
+    Route::put('cost-trackers/{id}', [CostTrackerController::class, 'update']);
+    Route::delete('cost-trackers/{id}', [CostTrackerController::class, 'destroy']);
 
 });
 
