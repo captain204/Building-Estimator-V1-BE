@@ -40,5 +40,7 @@ class DatabaseSeeder extends Seeder
         //$this->call(ProfileSeeder::class);
         //$this->call(BlogSeeder::class);
         $this->call(CostTrackerSeeder::class);
+        $this->call([EstimatorSeeder::class,]);
+
     }
 }

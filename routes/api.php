@@ -22,6 +22,7 @@ use App\Http\Controllers\LabourRatesController;
 use App\Http\Controllers\CallRequestController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\CostTrackerController;
+use App\Http\Controllers\EstimatorController;
 
 
 
@@ -61,18 +62,9 @@ Route::middleware('auth:sanctum')->prefix('users')->group(function () {
     // Authentication routes
     Route::post('/email/resend', [AuthenticationController::class, 'resendVerification']);
     Route::post('/logout', [AuthenticationController::class, 'logout']);
-});
 
-Route::middleware('auth:sanctum')->group(function () {
-    Route::post('profile', [ProfileController::class, 'create']);
-    Route::get('profile', [ProfileController::class, 'show']);
-    Route::put('profile', [ProfileController::class, 'update']);
-    Route::delete('profile', [ProfileController::class, 'delete']);
-    // Authentication routes
-    Route::post('/email/resend', [AuthenticationController::class, 'resendVerification']);
-    Route::post('/logout', [AuthenticationController::class, 'logout']);
-   
-
+    #Estimates
+    Route::post('/estimator', [EstimatorController::class, 'store']);
 });
 
 
@@ -172,6 +164,13 @@ Route::middleware(['auth:sanctum', AdminMiddleware::class])->prefix('admin')->gr
     Route::get('cost-trackers/{id}', [CostTrackerController::class, 'show']);
     Route::put('cost-trackers/{id}', [CostTrackerController::class, 'update']);
     Route::delete('cost-trackers/{id}', [CostTrackerController::class, 'destroy']);
+
+    #Estimators
+    Route::get('/estimate/all', [EstimatorController::class, 'getAllEstimates']);
+    Route::get('/estimate/automated', [EstimatorController::class, 'getAutomatedEstimates']);
+    Route::get('/estimate/custom', [EstimatorController::class, 'getCustomEstimates']);
+    Route::get('/estimate/{id}', [EstimatorController::class, 'getEstimateById']);
+
 
 });
 
