@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Estimator;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Log; 
 
 
 class EstimatorController extends Controller
@@ -16,50 +16,65 @@ class EstimatorController extends Controller
     {
         $user = Auth::user();
 
-        $request->validate([
-            'type' => 'required|in:custom,automated',
-            'work_items' => 'nullable|string',
-            'specifications' => 'nullable|string',
-            'to_array' => 'nullable|json',
-            'variable' => 'nullable|string',
-            'to_html' => 'nullable|string',
-            'require_custom_building' => 'nullable|in:1,2,3',
-            'other_information' => 'nullable|string',
-            'is_urgent' => 'boolean',
-            'agree' => 'boolean',
-            'custom_more' => 'boolean',
-            'classes' => 'nullable|string',
-        ]);
         try {
+            // Validate the incoming request
+            $validatedData = $request->validate([
+                'type' => 'required|in:custom,automated',
+                'work_items' => 'nullable|string',
+                'specifications' => 'nullable|string',
+                'to_array' => 'nullable|json',
+                'variable' => 'nullable|string',
+                'to_html' => 'nullable|string',
+                'require_custom_building' => 'nullable|in:yes,no',
+                'other_information' => 'nullable|string',
+                'is_urgent' => 'boolean',
+                'agree' => 'boolean',
+                'custom_more' => 'boolean',
+                'classes' => 'nullable|string',
+            ]);
+
+            Log::info('Validation passed.', ['data' => $validatedData]);
+
+            // Prepare data for database insertion
             $estimator = Estimator::create([
                 'user_id' => $user->id,
-                'type' => $request->type,
-                'work_items' => $request->work_items,
-                'specifications' => $request->specifications,
-                'to_array' => $request->to_array ? json_decode($request->to_array, true) : null,
-                'variable' => $request->variable,
-                'to_html' => $request->to_html,
-                'require_custom_building' => $request->require_custom_building,
-                'other_information' => $request->other_information,
-                'is_urgent' => $request->is_urgent ?? 1,
-                'agree' => $request->agree ?? 0,
-                'custom_more' => $request->custom_more ?? 0,
-                'classes' => $request->classes,
+                'type' => $validatedData['type'],
+                'work_items' => $validatedData['work_items'] ?? null,
+                'specifications' => $validatedData['specifications'] ?? null,
+                'to_array' => isset($validatedData['to_array']) ? json_encode(json_decode($validatedData['to_array'], true)) : null,
+                'variable' => $validatedData['variable'] ?? null,
+                'to_html' => $validatedData['to_html'] ?? null,
+                'require_custom_building' => $validatedData['require_custom_building'] ?? null,
+                'other_information' => $validatedData['other_information'] ?? null,
+                'is_urgent' => $validatedData['is_urgent'] ?? false,
+                'agree' => $validatedData['agree'] ?? false,
+                'custom_more' => $validatedData['custom_more'] ?? false,
+                'classes' => $validatedData['classes'] ?? null,
             ]);
-        
+
+            Log::info('Estimator created successfully.', ['estimator' => $estimator]);
+
+            // Return success response
             return response()->json([
                 'message' => 'Estimator created successfully',
                 'estimator' => $estimator,
             ], 201);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            Log::error('Validation failed.', ['errors' => $e->errors()]);
+            return response()->json([
+                'message' => 'Validation failed',
+                'errors' => $e->errors(),
+            ], 422);
         } catch (\Exception $e) {
-            Log::error('Error creating estimator:', ['error' => $e->getMessage()]);
+            Log::error('Error creating estimator.', ['error' => $e->getMessage()]);
             return response()->json([
                 'message' => 'Failed to create estimator',
                 'error' => $e->getMessage(),
             ], 500);
         }
-        
     }
+
+
     
     
     // Get estimates by a specific user

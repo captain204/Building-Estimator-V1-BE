@@ -58,6 +58,8 @@ Route::middleware('auth:sanctum')->prefix('users')->group(function () {
     Route::put('/profile', [ProfileController::class, 'update']);
     Route::delete('/profile', [ProfileController::class, 'delete']);
 
+
+
     
     // Authentication routes
     Route::post('/email/resend', [AuthenticationController::class, 'resendVerification']);
@@ -65,6 +67,7 @@ Route::middleware('auth:sanctum')->prefix('users')->group(function () {
 
     #Estimates
     Route::post('/estimator', [EstimatorController::class, 'store']);
+
 });
 
 
