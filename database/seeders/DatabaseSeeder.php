@@ -39,8 +39,10 @@ class DatabaseSeeder extends Seeder
         #$this->call(MaterialPriceList::class);
         //$this->call(ProfileSeeder::class);
         //$this->call(BlogSeeder::class);
-        $this->call(CostTrackerSeeder::class);
-        $this->call([EstimatorSeeder::class,]);
+        #$this->call(CostTrackerSeeder::class);
+        #$this->call([EstimatorSeeder::class,]);
+        $this->call([TradesmenVendorSeeder::class,]);
+
 
     }
 }

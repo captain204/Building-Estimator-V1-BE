@@ -23,6 +23,8 @@ use App\Http\Controllers\CallRequestController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\CostTrackerController;
 use App\Http\Controllers\EstimatorController;
+use App\Http\Controllers\TradesmenVendorController;
+
 
 
 
@@ -46,6 +48,9 @@ Route::get('/events', [EventController::class, 'index']);
 Route::get('/events/{id}', [EventController::class, 'show']);
 Route::get('cost-trackers', [CostTrackerController::class, 'index']);
 Route::get('cost-trackers/{id}', [CostTrackerController::class, 'show']);
+Route::get('tradesmen-vendors', [TradesmenVendorController::class, 'index']); 
+Route::post('tradesmen-vendors', [TradesmenVendorController::class, 'store']); 
+Route::get('tradesmen-vendors/{id}', [TradesmenVendorController::class, 'show']); 
 
 
 
@@ -174,6 +179,10 @@ Route::middleware(['auth:sanctum', AdminMiddleware::class])->prefix('admin')->gr
     Route::get('/estimate/custom', [EstimatorController::class, 'getCustomEstimates']);
     Route::get('/estimate/{id}', [EstimatorController::class, 'getEstimateById']);
 
+    #Tradesmen Vendor Controller
+    Route::put('tradesmen-vendors/{id}', [TradesmenVendorController::class, 'update']); 
+    Route::delete('tradesmen-vendors/{id}', [TradesmenVendorController::class, 'destroy']); 
+
 
 });
 
@@ -182,5 +191,175 @@ Route::middleware(['auth:sanctum', AdminMiddleware::class])->prefix('admin')->gr
 Route::get('/user', function (Request $request) {
     return response()->json($request->user());
 })->middleware('auth:sanctum');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
