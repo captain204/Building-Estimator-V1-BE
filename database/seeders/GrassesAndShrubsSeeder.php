@@ -4,19 +4,17 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use app\Models\Option;
-use app\Models\SubOption;
+use App\Models\GrassesAndShrubs;
 
-class SubOptionSeeder extends Seeder
+
+class GrassesAndShrubsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Option::factory()
-        ->count(10) 
-        ->has(SubOption::factory()->count(2)) 
-        ->create();
+        GrassesAndShrubs::factory()->count(10)->create();
+
     }
 }

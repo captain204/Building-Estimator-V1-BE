@@ -24,6 +24,9 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\CostTrackerController;
 use App\Http\Controllers\EstimatorController;
 use App\Http\Controllers\TradesmenVendorController;
+use App\Http\Controllers\GrassesAndShrubsController;
+use App\Http\Controllers\GrassesShrubsTreesController;
+use App\Http\Controllers\MechanicalClearingController;
 
 
 
@@ -183,9 +186,26 @@ Route::middleware(['auth:sanctum', AdminMiddleware::class])->prefix('admin')->gr
     Route::put('tradesmen-vendors/{id}', [TradesmenVendorController::class, 'update']); 
     Route::delete('tradesmen-vendors/{id}', [TradesmenVendorController::class, 'destroy']); 
 
+    #Automated Admin Endpoints
+    #Manual Clearing
+    #Grasses and Shrubs
+    Route::post('/grasses-shrubs', [GrassesAndShrubsController::class, 'store']);
+    Route::get('/grasses-shrubs', [GrassesAndShrubsController::class, 'show']); 
+    Route::put('/grasses-shrubs', [GrassesAndShrubsController::class, 'update']);
+
+    #Grassess Shrubs and Trees
+    Route::post('/grasses-shrubs-trees', [GrassesShrubsTreesController::class, 'store']);  
+    Route::get('/grasses-shrubs-trees', [GrassesShrubsTreesController::class, 'show']);     
+    Route::put('/grasses-shrubs-trees', [GrassesShrubsTreesController::class, 'update']); 
+
+    #Mechanical Clearing
+    Route::post('/mechanical-clearing', [MechanicalClearingController::class, 'store']); 
+    Route::get('/mechanical-clearing', [MechanicalClearingController::class, 'show']); 
+    Route::get('/mechanical-clearing/{category}', [MechanicalClearingController::class, 'showByCategory']); 
+    Route::put('/mechanical-clearing/{category}', [MechanicalClearingController::class, 'update']);
+    Route::delete('/mechanical-clearing/{category}', [MechanicalClearingController::class, 'destroy']);
 
 });
-
 
 
 Route::get('/user', function (Request $request) {
