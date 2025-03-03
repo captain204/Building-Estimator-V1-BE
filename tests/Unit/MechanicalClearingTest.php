@@ -17,9 +17,9 @@ class MechanicalClearingTest extends TestCase
     {
         parent::setUp();
 
-        // Create an admin user with role = 1
+        // Create an admin user for authentication
         $this->admin = User::factory()->create([
-            'role' => 1, // Admin role
+            'role' => 1, // Use role 1 instead of is_admin
         ]);
     }
 

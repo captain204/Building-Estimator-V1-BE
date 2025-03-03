@@ -204,7 +204,6 @@ Route::middleware(['auth:sanctum', AdminMiddleware::class])->prefix('admin')->gr
     Route::get('/mechanical-clearing/{category}', [MechanicalClearingController::class, 'showByCategory']); 
     Route::put('/mechanical-clearing/{category}', [MechanicalClearingController::class, 'update']);
     Route::delete('/mechanical-clearing/{category}', [MechanicalClearingController::class, 'destroy']);
-
 });
 
 
